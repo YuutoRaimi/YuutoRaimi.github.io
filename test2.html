@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pendaftaran Kelompok</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Pendaftaran Kelompok</h1>
+    <form onsubmit="return false;">
+        <div class="form-floating mb-3">
+            <input type="text" id="nama_kelompok" name="nama_kelompok" class="form-control" placeholder="Nama Kelompok">
+            <label for="nama_kelompok">Nama Kelompok</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" id="jumlah_anggota" name="jumlah_anggota" class="form-control" placeholder="Jumlah Anggota" onchange="generateAnggota()">
+            <label for="jumlah_anggota">Jumlah Anggota</label>
+        </div>
+        <div id="anggota"></div>
+        <br>
+        <button class="btn btn-primary">Daftar Kelompok</button>
+    </form>
+    
+    <script>
+        function generateAnggota() {
+            let jumlahAnggota = document.getElementById("jumlah_anggota").value;
+            let anggota = document.getElementById("anggota");
+            
+            // Hapus field anggota sebelumnya
+            while (anggota.firstChild) {
+                anggota.removeChild(anggota.firstChild);
+            }
+            
+            // Buat heading h3 Anggota Kelompok
+            let heading = document.createElement("h3");
+            heading.innerHTML = "Anggota Kelompok:";
+            anggota.appendChild(heading);
+            
+            // Buat field anggota baru
+            for (let i = 1; i <= jumlahAnggota; i++) {
+                let div = document.createElement("div");
+                div.classList.add("form-floating", "mb-3");
+                
+                let input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "nama_anggota_" + i);
+                input.setAttribute("id", "nama_anggota_" + i);
+                input.setAttribute("placeholder", "Nama Anggota " + i);
+                input.classList.add("form-control");
+                
+                let label = document.createElement("label");
+                label.setAttribute("for", "nama_anggota_" + i);
+                label.innerHTML = "Nama Anggota " + i;
+                
+
+                div.appendChild(input);
+                div.appendChild(label);
+                
+                anggota.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>
